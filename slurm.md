@@ -211,13 +211,27 @@ Repeat [Step 2: Create SSH keys](#step-2-create-ssh-keys), except this time crea
 Conda is a package and environment management system that allows you to create isolated environments with specific package versions, making it easy to manage dependencies and reproduce results across different systems.
 
 1. Connect to cluster
-2. In a terminal on the cluster:
+2. Install conda. There are two options for this: (a) Install a new copy of conda into your user-space, or (b) use the existing conda installation on the cluster.
 
-```bash
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
-bash ~/miniconda.sh
-```
-You can accept the defaults. Make sure you select yes when it asks to run conda init. This will ensure conda is activated by default. Re-open and close your terminal.
+    - 2(a) Install a new copy of conda into your user-space: In a terminal on the cluster:
+
+        ```bash
+        wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
+        bash ~/miniconda.sh
+        ```
+
+        You can accept the defaults. Make sure you select yes when it asks to run conda init. This will ensure conda is activated by default. Re-open and close your terminal.
+
+    - 2(b) Use the existing conda installation on the cluster (randi-specific, on other systems, try `module spider miniconda` to get instructions). To load the modules required for conda, in a terminal on the cluster, type:
+
+        ``` bash
+        module load gcc/12.1.0
+        module load miniconda3/24.9.2
+        ```
+
+        Before using conda the first time, you should run `conda init`. Close and re-open your terminal.
+        
+        Now you can use `conda`. Remember that you have to reload these modules each time you log in again (consider adding the commands to load the modules to your `.bashrc`).
 
 3. Create a new environment
 ```bash
